@@ -1,0 +1,9 @@
+Feature: My validations on Testme Application
+
+  Background: Testme website is launched in browser
+
+  Scenario: User acces the registeration link zz
+    Given TestmeApp website is launchedz
+    And User clicks on register linkz
+    When User enters the detailsz
+    Then Clicks on register button for account creationz

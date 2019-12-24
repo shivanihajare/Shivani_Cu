@@ -1,0 +1,46 @@
+package definitions;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class OnlineShop {
+	
+
+	WebDriver driver;
+
+	
+	@Given("TestmeApp website is launched")
+	public void testmeapp_website_is_launched() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		System.setProperty("webdriver.chrome.driver","Resources\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("http://10.232.237.143:443/TestMeApp/fetchcat.htm");
+	}
+
+	@Given("User clicks on register link")
+	public void user_clicks_on_register_link() {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+		
+	}
+
+	@When("User enters the details")
+	public void user_enters_the_details() {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+	}
+
+	@Then("Clicks on register button for account creation")
+	public void clicks_on_register_button_for_account_creation() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+	}
+
+
+
+}

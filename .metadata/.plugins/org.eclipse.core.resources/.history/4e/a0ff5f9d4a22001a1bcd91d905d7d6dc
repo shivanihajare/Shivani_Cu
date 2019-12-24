@@ -1,0 +1,12 @@
+package runner;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features="Features", glue="C:\\Users\\pdc3b-training.pdc3b\\eclipse\\shivanihajare\\Cucumber_CS\\src\\test\\java\\definitions\\OnlineShop.java", tags= {" @smokezzzz"})
+public class OnlineShopRunner {
+
+}

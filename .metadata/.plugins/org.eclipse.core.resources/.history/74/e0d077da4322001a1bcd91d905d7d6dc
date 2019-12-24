@@ -1,0 +1,92 @@
+package definitions;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class OnlineShop {
+	
+
+	WebDriver driver;
+
+	
+	@Given("TestmeApp website is launched")
+	public void testmeapp_website_is_launched() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+	
+		System.setProperty("webdriver.chrome.driver", "MyResources\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("http://10.232.237.143:443/TestMeApp/fetchcat.htm");
+		driver.manage().window().maximize();
+	}
+
+	@Given("User clicks on register link")
+	public void user_clicks_on_register_link() {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+		driver.findElement(By.xpath("//*[@id=\"header\"]/div[1]/div/div/div[2]/div/ul/li[2]/a")).click();
+	}
+
+	@When("User enters the details")
+	public void user_enters_the_details() throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+		driver.findElement(By.xpath("//*[@id=\"userName\"]")).sendKeys("Meghan456");
+		driver.findElement(By.xpath("//*[@id=\"firstName\"]")).sendKeys("Meghan456");
+		driver.findElement(By.xpath("//*[@id=\"lastName\"]")).sendKeys("Markle");
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("meghan456");
+		driver.findElement(By.xpath("//*[@id=\"pass_confirmation\"]")).sendKeys("meghan456");
+		driver.findElement(By.xpath("//*[@id=\"gender\"]")).click();
+		driver.findElement(By.xpath("//*[@id=\"emailAddress\"]")).sendKeys("meghan000@gmail.com");
+		driver.findElement(By.xpath("//*[@id=\"mobileNumber\"]")).sendKeys("1111122222");
+		driver.findElement(By.xpath("//*[@id=\"dob\"]")).sendKeys("10/12/1997");
+		driver.findElement(By.xpath("//*[@id=\"address\"]")).sendKeys("Hinjewadi,Pune");
+		Select question = new Select(driver.findElement(By.name("securityQuestion")));
+		question.selectByIndex(0);
+		driver.findElement(By.xpath("//*[@id=\"answer\"]")).sendKeys("Pune");
+		Thread.sleep(3000);
+		
+	}
+
+	@Then("Clicks on register button for account creation")
+	public void clicks_on_register_button_for_account_creation() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		driver.findElement(By.xpath("/html/body/main/div/div/form/fieldset/div/div[13]/div/input[1]")).click();
+	}
+	
+	@Given("Registered user clicks on Login Link")
+	public void registered_user_clicks_on_Login_Link() {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+	}
+
+	@When("User enters the username {string}")
+	public void user_enters_the_username(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+	}
+
+	@When("User enters the password {string}")
+	public void user_enters_the_password(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+	}
+
+	@Then("Clicks on Login button to access the website")
+	public void clicks_on_Login_button_to_access_the_website() {
+	    // Write code here that turns the phrase above into concrete actions
+	   // throw new cucumber.api.PendingException();
+	}
+
+
+
+
+
+}

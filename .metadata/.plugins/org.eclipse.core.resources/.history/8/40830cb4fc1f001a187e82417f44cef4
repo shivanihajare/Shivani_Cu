@@ -1,0 +1,130 @@
+package testmeApp.tests;
+
+import org.testng.annotations.Test;
+
+import testmeApp.utility.Drivers;
+
+import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+
+public class OnlineShoppingTest {
+
+	WebDriver driver;
+
+	@BeforeTest
+	public void beforeTest() throws InterruptedException {
+		
+		driver = Drivers.getDriver("chrome");
+		driver.manage().window().maximize();
+		Thread.sleep(3000);
+		
+	}
+	@Test(priority=1)
+	public void testRegisteration() throws InterruptedException {
+		
+		driver.get("http://10.232.237.143:443/TestMeApp/fetchcat.htm");
+		Thread.sleep(6000);
+		
+		driver.findElement(By.xpath("//a[contains(.,'SignUp')]")).click();
+		
+		driver.findElement(By.xpath("//input[contains(@name,'userName')]")).sendKeys("anki");
+		driver.findElement(By.xpath("//input[contains(@name,'firstName')]")).click();
+		String text= driver.findElement(By.xpath("//*[@id=\"err\"]")).getText();
+		
+		Assert.assertEquals("Available", text);
+		
+		driver.findElement(By.xpath("//input[contains(@name,'firstName')]")).sendKeys("anki");
+		driver.findElement(By.xpath("//input[contains(@name,'lastName')]")).sendKeys("patil");
+		
+		driver.findElement(By.xpath("//input[contains(@name,'password')]")).sendKeys("anki123");
+		driver.findElement(By.xpath("//*[@id=\"pass_confirmation\"]")).sendKeys("anki123");
+		
+		driver.findElement(By.xpath("//input[@value='Female']")).click();
+		driver.findElement(By.xpath("//input[contains(@name,'emailAddress')]")).sendKeys("anki123@gmail.com");
+		
+		driver.findElement(By.xpath("//input[contains(@name,'mobileNumber')]")).sendKeys("9444007000");
+		driver.findElement(By.xpath("//input[contains(@name,'dob')]")).sendKeys("01/12/2019");
+		
+		driver.findElement(By.xpath("//textarea[@name='address'][contains(.,'Address')]")).sendKeys("Hinjewadi,Pune");
+		
+		Select question = new Select(driver.findElement(By.name("securityQuestion")));
+		question.selectByIndex(0);
+		
+		driver.findElement(By.xpath("//input[@name='answer']")).sendKeys("Pune");
+		driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
+		Thread.sleep(4000);
+		
+		
+	}
+	@Test(priority =2)
+	public void testLogin() throws InterruptedException{
+		
+		driver.get("http://10.232.237.143:443/TestMeApp/fetchcat.htm");
+		
+		Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//a[contains(.,'SignIn')]")).click();
+		
+		driver.findElement(By.xpath("//input[contains(@name,'userName')]")).sendKeys("anki");
+		driver.findElement(By.xpath("//input[contains(@name,'password')]")).sendKeys("anki123");
+		
+		driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
+		Thread.sleep(4000);
+			
+	}
+	
+	@Test(priority=3)
+	public void testCart() throws InterruptedException {
+		
+		driver.findElement(By.xpath("//input[contains(@type,'text')]")).sendKeys("Headphone");
+		driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
+		Thread.sleep(4000);
+		
+		driver.findElement(By.xpath("/html/body/section/div/div/div[2]/div/div/div/div[2]/center/a")).click();
+		driver.findElement(By.xpath("//i[contains(@class,'fa fa-shopping-cart')]")).click();
+		
+		String Headphone = driver.findElement(By.xpath("/html/body/main/section/div[3]/table/tbody/tr/td[1]/div/div/h4")).getText();
+		
+		Assert.assertEquals("Headphone", Headphone);
+		
+		driver.findElement(By.xpath("/html/body/main/section/div[3]/table/tfoot/tr[2]/td[5]/a")).click();
+		Thread.sleep(3000);
+		
+	}
+	
+	@Test(priority =4)
+	public void testPayment() throws InterruptedException {
+		driver.findElement(By.xpath("//input[contains(@value,'Proceed to Pay')]")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div/div/div/div[2]/div[2]/div/label/i")).click();
+		
+		driver.findElement(By.xpath("//*[@id=\"btn\"]")).click();
+		
+		
+		driver.findElement(By.xpath("//input[contains(@type,'text')]")).sendKeys("123457");
+		driver.findElement(By.xpath("//input[contains(@type,'password')]")).sendKeys("Pass@457");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//input[contains(@value,'LOGIN')]")).click();
+		
+		driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div/div/div/div/form/input")).sendKeys("Trans@457");
+		driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
+		Thread.sleep(3000);
+		
+		
+		String product = driver.findElement(By.xpath("//td[@class='hidden-sm'][contains(.,'Headphone')]")).getText();
+		Assert.assertEquals("Headphone",product );
+		Thread.sleep(3000);
+		
+		
+		driver.close();
+		
+	}
+
+	
+
+}
